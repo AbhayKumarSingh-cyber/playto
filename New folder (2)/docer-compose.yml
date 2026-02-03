@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: playto
+      POSTGRES_USER: playto_user
+      POSTGRES_PASSWORD: playto_pass
+  web:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
